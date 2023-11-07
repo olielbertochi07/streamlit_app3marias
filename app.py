@@ -8,7 +8,7 @@ DB_PASSWORD = config('DB_PASSWORD')
 DB_PORT = config('DB_PORT')
 DB_DATABASE = config('DB_DATABASE')
 def check_login(username, password):
-    sql = "SELECT * FROM tbl_cadastro_funcionario f WHERE f.usuario = %s AND f.clave = PASSWORD(%s) and f.clave <> '' and f.usuario <>'' limit 1;"
+    sql = "CALL `App_Consulta_Sessao`(%s, %s)"
     mycursor.execute(sql, (username, password))
     result = mycursor.fetchone()
     return result
@@ -53,8 +53,6 @@ def Filtrar():
             may_formatted = "Mayorista: " + "{:,} Gs".format(int(row['Mayorista'])).replace(",", ".")
             vent_formatted ="Venta: " + "{:,} Gs".format(int(row['Venta'])).replace(",", ".")     
             st.markdown(f'<div style="float: left;">{may_formatted}</div><div style="float: right;">{vent_formatted}</div>', unsafe_allow_html=True)       
-
-
 def login_page():
     st.title("Bertochi Sistemas")
     username = st.text_input("",placeholder="Informe el Usuario", key="user-input")
