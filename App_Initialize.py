@@ -1,7 +1,8 @@
+import mysqlx
 import streamlit as st
-import mysql.connector
+from mysql.connector import * 
 from decouple import config
-import hashlib
+from hashlib import *
 DB_HOST = config('DB_HOST')
 DB_USER = config('DB_USER')
 DB_PASSWORD = config('DB_PASSWORD')
@@ -12,7 +13,7 @@ def check_login(username, password):
     mycursor.execute(sql, (username, password))
     result = mycursor.fetchone()
     return result
-mydb = mysql.connector.connect(
+mydb = mysqlx.connector.connect(
     host=DB_HOST,
     user=DB_USER,
     password=DB_PASSWORD,
