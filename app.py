@@ -57,8 +57,10 @@ def login_page():
     st.title("Bertochi Sistemas")
     username = st.text_input("",placeholder="Informe el Usuario", key="user-input")
     password = st.text_input("",placeholder="Informe la Contraseña", type="password")
+    password = password.upper()
+    username = username.upper()
     if st.button("Iniciar Sessão"):
-        if check_login(username.upper, password.upper):
+        if check_login(username, password):
             st.session_state['logged_in'] = True
             st.experimental_rerun()
         else:
