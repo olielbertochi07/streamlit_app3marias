@@ -58,7 +58,7 @@ def login_page():
     username = st.text_input("",placeholder="Informe el Usuario", key="user-input")
     password = st.text_input("",placeholder="Informe la Contraseña", type="password")
     if st.button("Iniciar Sessão"):
-        if check_login(username, password):
+        if check_login(username.upper, password.upper):
             st.session_state['logged_in'] = True
             st.experimental_rerun()
         else:
