@@ -1,5 +1,5 @@
-import streamlit as st
 import mysql.connector
+import streamlit as st
 from decouple import config
 from hashlib import *
 DB_HOST = config('DB_HOST')
