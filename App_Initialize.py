@@ -2,7 +2,23 @@ import streamlit as st
 import mysql.connector
 from decouple import config
 import hashlib
-
+DB_HOST = config('DB_HOST')
+DB_USER = config('DB_USER')
+DB_PASSWORD = config('DB_PASSWORD')
+DB_PORT = config('DB_PORT')
+DB_DATABASE = config('DB_DATABASE')
+def check_login(username, password):
+    sql = "SELECT * FROM tbl_cadastro_funcionario f WHERE f.usuario = %s AND f.clave = PASSWORD(%s) and f.clave <> '' and f.usuario <>'' limit 1;"
+    mycursor.execute(sql, (username, password))
+    result = mycursor.fetchone()
+    return result
+mydb = mysql.connector.connect(
+    host=DB_HOST,
+    user=DB_USER,
+    password=DB_PASSWORD,
+    port=DB_PORT,
+    database=DB_DATABASE)
+mycursor = mydb.cursor()
 
 def Filtrar():
     st.subheader("Lista de Productos")
@@ -37,33 +53,8 @@ def Filtrar():
             may_formatted = "Mayorista: " + "{:,} Gs".format(int(row['Mayorista'])).replace(",", ".")
             vent_formatted ="Venta: " + "{:,} Gs".format(int(row['Venta'])).replace(",", ".")     
             st.markdown(f'<div style="float: left;">{may_formatted}</div><div style="float: right;">{vent_formatted}</div>', unsafe_allow_html=True)       
-DB_HOST = config('DB_HOST')
-DB_USER = config('DB_USER')
-DB_PASSWORD = config('DB_PASSWORD')
-DB_PORT = config('DB_PORT')
-DB_DATABASE = config('DB_DATABASE')
-def check_login(username, password):
-    sql = "SELECT * FROM tbl_cadastro_funcionario f WHERE f.usuario = %s AND f.clave = PASSWORD(%s) and f.clave <> '' and f.usuario <>'' limit 1;"
-    mycursor.execute(sql, (username, password))
-    result = mycursor.fetchone()
-    return result
-mydb = mysql.connector.connect(
-    host=DB_HOST,
-    user=DB_USER,
-    password=DB_PASSWORD,
-    port=DB_PORT,
-    database=DB_DATABASE)
-mycursor = mydb.cursor()
-def disable_browser_translation():
-    st.markdown(
-        """
-        <script>
-        document.documentElement.lang = "pt-BR"; // Define o idioma da página (opcional)
-        document.documentElement.setAttribute("translate", "no");
-        </script>
-        """,
-        unsafe_allow_html=True,
-    )
+
+
 def login_page():
     st.title("Bertochi Sistemas")
     username = st.text_input("",placeholder="Informe el Usuario", key="user-input")
@@ -75,13 +66,14 @@ def login_page():
         else:
             st.error("Login falhou. Verifique suas credenciais.")
 def main():
-    disable_browser_translation()
-    if 'logged_in' not in st.session_state:
-        st.session_state['logged_in'] = False
-    if st.session_state['logged_in']:
-        Filtrar()
-    else:
-        login_page()
+    st.button("teste")
+
+    #if 'logged_in' not in st.session_state:
+    #    st.session_state['logged_in'] = False
+    #if st.session_state['logged_in']:
+    #    Filtrar()
+    #else:
+    #    login_page()
 if __name__ == "__main__":
     st.set_page_config( 
         page_title="Bertochi Sistemas",
