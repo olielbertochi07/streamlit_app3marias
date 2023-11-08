@@ -1,1 +1,1 @@
-# streamlit_app3marias
+# streamlit_lista_stock
