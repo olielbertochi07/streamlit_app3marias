@@ -1,29 +1,27 @@
-.main-content {
-    max-width: 500px;
-}
-
-#MainMenu {
-    visibility: hidden;
-}
+#MainMenu {visibility: hidden;}
 footer {visibility: hidden;}
 
+
+
 .stButton > button {
+    width: 100%;
+    margin-top: 15px;
     background-color: #3498db; /* Cor de fundo */
     color: #fff; /* Cor do texto */
     padding: 10px 20px; /* Espaçamento interno (ajuste conforme necessário) */
     border: none; /* Sem borda */
-    border-radius: 5px; /* Cantos arredondados */
-    font-size: 16px; /* Tamanho da fonte */
+    border-radius: 10px; /* Cantos arredondados */
+    font-size: 10px; /* Tamanho da fonte */
     cursor: pointer; /* Cursor de mão ao passar o mouse */
-    transition: background-color 0.3s ease; /* Transição suave da cor de fundo */
+    transition: background-color 0.3s ease;
+    align-content: center; /* Transição suave da cor de fundo */
 }
-
 .stButton > button:hover {
     background-color: #2e86c1;
-    color: #fff;
+    color: aliceblue;    
 }
-
 .stButton > button:active {
     background-color: #2e86c1; /* Cor de fundo enquanto clicado */
-    color: #fff; /* Cor do texto enquanto clicado */
+    color: teal; /* Cor do texto enquanto clicado */
 }
+
