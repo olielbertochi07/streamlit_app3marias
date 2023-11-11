@@ -1,12 +1,10 @@
 import mysql.connector
 from decouple import config
-
 DB_HOST = config('DB_HOST')
 DB_USER = config('DB_USER')
 DB_PASSWORD = config('DB_PASSWORD')
 DB_PORT = config('DB_PORT')
 DB_DATABASE = config('DB_DATABASE')
-
 def get_database_connection():
     return mysql.connector.connect(
         host=DB_HOST,
@@ -24,12 +22,22 @@ def check_login(username, password):
     mycursor.close()
     mydb.close()
     return result
-
 def get_filtered_data(filtro_id, filtro_codigo, filtro_descricao):
+
     mydb = get_database_connection()
     mycursor = mydb.cursor()
     sql = "CALL `App_Consulta_Stock`(%s, %s, %s, '100')"
     mycursor.execute(sql, (filtro_id, f'%{filtro_codigo}%', f'%{filtro_descricao}%'))
+    results = mycursor.fetchall()
+    mycursor.close()
+    mydb.close()
+    return results
+
+def get_lista_presupuesto(filtro_):  
+    mydb = get_database_connection()
+    mycursor = mydb.cursor()
+    SQL ="CALL `App_Consulta_Presupuestos`(%s);"
+    mycursor.execute(SQL, (f'{filtro_}'))
     results = mycursor.fetchall()
     mycursor.close()
     mydb.close()

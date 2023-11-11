@@ -13,7 +13,8 @@ def Filtrar():
     formatted_results = [{"Id": row[0], "Codigo": row[1], "Descripcion": row[2], "Stock": row[3], "Min": row[4], "Mayorista": row[5], "Venta": row[6]} for row in results]
     for idx, row in enumerate(formatted_results):
         if idx > 0:
-            st.write('---')
+            st.markdown('<hr class="linha-presupuesto">', unsafe_allow_html=True)
+            st.markdown("<style> .linha-presupuesto {margin: 0px 0;}</style>",unsafe_allow_html=True)
         left_column, right_column = st.columns([1, 3])
         with left_column:
             id_format = (f'ID: {row["Id"]}')
@@ -38,10 +39,12 @@ def login_page():
     username = st.text_input("", placeholder="Informe el Usuario", key="user-input")
     password = st.text_input("", placeholder="Informe la Contraseña", type="password")
     password = password.upper()
-    username = username.upper()
+    username = username.upper()    
     if st.button("Iniciar Sessão"):
         if check_login(username, password):
             st.session_state['logged_in'] = True
             st.experimental_rerun()
         else:
             st.error("Login falhou. Verifique suas credenciais.")
+    with open("styles.css") as f:
+        st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
