@@ -61,14 +61,12 @@ def Filtrar_Presupuesto():
                             st.markdown(f'<div style="float: left;color:{temp_color};">{descripcion_format}</div>', unsafe_allow_html=True)
                     
                         with right_column:
-                            stock_formatted = "<span>Cant: {:,} </span>".format(int(row[3])).replace(",", ".")
-                            pc_formatted = "" + "{:,}".format(int(row[4])).replace(",", ".")
-                            tl_formatted ="" + "{:,} Gs".format(int(row[5])).replace(",", ".")  
+                            ctd_formatted = "<span>Cant: {:,} </span>".format(int(row[3])).replace(",", ".")
+                            pc_formatted = "Precio: " + "{:,} Gs".format(int(row[4])).replace(",", ".")
+                            tl_formatted ="Total: " + "{:,} Gs".format(int(row[5])).replace(",", ".")  
 
-                            # st.markdown(f'<div style="float: left;">{pc_formatted}</div><div style="float: right;">{tl_formatted}</div>', unsafe_allow_html=True)
-                            st.markdown(f'<div style="float: left; color:{temp_color};">{stock_formatted} X</div> <div style="float: right; color:{temp_color};">{pc_formatted}</div>', unsafe_allow_html=True)
-                            st.markdown(f'<div style="float: right; color:{temp_color};">{tl_formatted}</div>', unsafe_allow_html=True)
-                            
+                            st.markdown(f'<div style="display: inline-block; float: left; margin-right: 40px; color:{temp_color};">{ctd_formatted}</div> <div style="display: inline-block;margin-right: 50px; text-align: center; color:{temp_color};">{pc_formatted}</div> <div style="display: inline-block; float: right; color:{temp_color};">{tl_formatted}</div>', unsafe_allow_html=True)
+
                             total +=  row[5]
                         st.markdown('<hr class="linha-cinza";color:{temp_color}; margin-top: -100px;margin-bottom: -30px;>', unsafe_allow_html=True) 
                     total_formatted = "Total: " + "{:,} Gs".format(int(total)).replace(",", ".")
