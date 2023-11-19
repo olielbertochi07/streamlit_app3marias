@@ -51,27 +51,22 @@ def Filtrar_Presupuesto():
                     rst = lista_items(e)
                     total = 0
                     for row in rst:                
-                        left_column, right_column = st.columns([2, 1])
-                        with left_column:
-                            id_format = (f'ID: {row[0]}')
-                            codigo_format = (f'{row[1]}')
-                            st.markdown(f'<div style="float: left;color:{temp_color};">{id_format}</div>', unsafe_allow_html=True)
-                            st.markdown(f'<div style="float: left;color:{temp_color};">{codigo_format}</div>', unsafe_allow_html=True)     
-                            descripcion_format = (f'{row[2]}')
-                            st.markdown(f'<div style="float: left;color:{temp_color};">{descripcion_format}</div>', unsafe_allow_html=True)
-                    
-                        with right_column:
-                            ctd_formatted = "<span>Cant: {:,} </span>".format(int(row[3])).replace(",", ".")
-                            pc_formatted = "Precio: " + "{:,} Gs".format(int(row[4])).replace(",", ".")
-                            tl_formatted ="Total: " + "{:,} Gs".format(int(row[5])).replace(",", ".")  
-
-                            st.markdown(f'<div style="display: inline-block; float: left; margin-right: 40px; color:{temp_color};">{ctd_formatted}</div> <div style="display: inline-block;margin-right: 50px; text-align: center; color:{temp_color};">{pc_formatted}</div> <div style="display: inline-block; float: right; color:{temp_color};">{tl_formatted}</div>', unsafe_allow_html=True)
-
-                            total +=  row[5]
-                        st.markdown('<hr class="linha-cinza";color:{temp_color}; margin-top: -100px;margin-bottom: -30px;>', unsafe_allow_html=True) 
+                        id_format = (f'ID: {row[0]}')
+                        codigo_format = (f'{row[1]}')
+                        st.markdown(f'<div style="float: left;color:{temp_color};">{id_format}</div>', unsafe_allow_html=True)
+                        st.markdown(f'<div style="float: left;color:{temp_color};">{codigo_format}</div>', unsafe_allow_html=True)     
+                        descripcion_format = (f'{row[2]}')
+                        st.markdown(f'<div style="float: left;color:{temp_color};">{descripcion_format}</div>', unsafe_allow_html=True)
+                        ctd_formatted = "<span>Cantidad: {:,} Und</span>".format(int(row[3])).replace(",", ".")
+                        pc_formatted = "Precio: " + "{:,} Gs".format(int(row[4])).replace(",", ".")
+                        tl_formatted ="Total: " + "{:,} Gs".format(int(row[5])).replace(",", ".")  
+                        st.markdown(f'<div style="display: inline-block; float: left; margin-right: 40px; color:{temp_color};">{ctd_formatted}</div>', unsafe_allow_html=True)
+                        st.markdown(f'<div style="display: inline-block; float: left; margin-right: 40px; color:{temp_color};">{pc_formatted}</div> <div style="display: inline-block; float: right; color:{temp_color};">{tl_formatted}</div>', unsafe_allow_html=True)
+                        total +=  row[5]    
+                        st.markdown('<hr class="linha-cinza";color:{temp_color}; margin-top: -100 px;margin-bottom: -30px;>', unsafe_allow_html=True) 
                     total_formatted = "Total: " + "{:,} Gs".format(int(total)).replace(",", ".")
                     st.markdown(f'<div style="float: right;color:{temp_color};">{total_formatted}</div>', unsafe_allow_html=True)
-                    if st.form_submit_button('↑'):
+                    if st.form_submit_button('Volver ↑'):
                         d = "0"
                     
             st.markdown("<style> .linha-presupuesto {border: 0.1px solid burlywood;margin: 20px 0;}</style>",unsafe_allow_html=True)
